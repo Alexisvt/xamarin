@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UIDemo.UIDemoPage">
+  <StackLayout Orientation="Vertical" Padding="10,20,10,10">
+    <Label Text="My
+Label" XAlign="Center" />
+    <Button Text="My Button" />
+    <Entry Text="My
+Entry" />
+    <Image Source="xamagon.png" />
+    <Switch IsToggled="true" />
+    <Stepper Value="10" />
+  </StackLayout>
+</ContentPage>
