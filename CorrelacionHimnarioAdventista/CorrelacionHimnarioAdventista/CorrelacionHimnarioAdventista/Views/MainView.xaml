@@ -26,7 +26,7 @@
   <Entry Placeholder="# Himno" Keyboard="Numeric" Grid.Row="4" Grid.Column="1" />
   <Button Text="Buscar" FontSize="Large" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" />
   <StackLayout Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"> 
-    <ActivityIndicator Color="Red" IsRunning="True" />
+    <ActivityIndicator Color="Red" IsRunning="False" />
   </StackLayout>
 </Grid>
 </ContentPage>

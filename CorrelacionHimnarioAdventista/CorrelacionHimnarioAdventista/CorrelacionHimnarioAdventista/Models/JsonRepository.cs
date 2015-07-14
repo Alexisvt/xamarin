@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace CorrelacionHimnarioAdventista
+namespace CorrelacionHimnarioAdventista.Models
 {
     public class JsonRepository : IReadOnlyRepository
     {
