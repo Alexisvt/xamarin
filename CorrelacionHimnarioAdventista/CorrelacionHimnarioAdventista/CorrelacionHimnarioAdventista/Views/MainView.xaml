@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CorrelacionHimnarioAdventista.Views.MainView">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*"/>
+      <ColumnDefinition Width="*"/>
+    </Grid.ColumnDefinitions>
+  
+  <Label Text="Correlacion entre ediciones" FontSize="32" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" XAlign="Center" YAlign="Center" />
+  <Label Text="Nombre del Himno" FontSize="Large" Grid.Row="1" Grid.Column="0" XAlign="Center" YAlign="Center" Grid.ColumnSpan="2" />
+  <SearchBar Placeholder="Nombre del himno" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" />
+  <Label Text="# Nuevo" FontSize="Medium" Grid.Row="3" Grid.Column="0" XAlign="Center" YAlign="Center" />  
+  <Label Text="# Viejo" FontSize="Medium" Grid.Row="3" Grid.Column="1" XAlign="Center" YAlign="Center" />
+  <Entry Placeholder="# Himno" Keyboard="Numeric" Grid.Row="4" Grid.Column="0" />
+  <Entry Placeholder="# Himno" Keyboard="Numeric" Grid.Row="4" Grid.Column="1" />
+  <Button Text="Buscar" FontSize="Large" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" />
+  <StackLayout Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"> 
+    <ActivityIndicator Color="Red" IsRunning="True" />
+  </StackLayout>
+</Grid>
+</ContentPage>
