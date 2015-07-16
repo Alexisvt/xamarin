@@ -1,5 +1,6 @@
 ﻿using CorrelacionHimnarioAdventista.Models.Abstract;
 using CorrelacionHimnarioAdventista.Models.Concrete;
+using HelperClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,12 +21,13 @@ namespace CorrelacionHimnarioAdventista.Models
         {
             ILoadFile service = DependencyService.Get<ILoadFile>();
 
-            JsonString = service.LoadJson("himnarioDB.json");
-
+            //Get the first item in the collection
+            JsonString = service.LoadJson("himnarioDB.json").DefaultIfEmpty("").Single();
             if (!String.IsNullOrEmpty(JsonString))
             {
-                throw Nul
+                
             }
+
         }
         #endregion
 
@@ -50,7 +52,7 @@ namespace CorrelacionHimnarioAdventista.Models
 
         #region Properties
         public IEnumerable<HimnoModel> HimnarioData { get; private set; }
-        private virtual string JsonString
+        protected virtual string JsonString
         {
             get { return _jsonString; }
             set { _jsonString = value; }

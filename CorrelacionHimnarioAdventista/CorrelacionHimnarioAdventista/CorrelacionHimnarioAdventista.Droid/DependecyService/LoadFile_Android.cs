@@ -13,6 +13,7 @@ using Android.Widget;
 using Xamarin.Forms;
 using CorrelacionHimnarioAdventista.Models.Abstract;
 using CorrelacionHimnarioAdventista.Droid.DependecyService;
+using HelperClasses;
 
 [assembly: Dependency(typeof(LoadFile_Android))]
 
@@ -20,12 +21,19 @@ namespace CorrelacionHimnarioAdventista.Droid.DependecyService
 {
     public class LoadFile_Android : ILoadFile
     {
-        public string LoadJson(string fileName)
+        public Maybe<String> LoadJson(string fileName)
         {
+            string jsonData;
             var documentsPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
             var filePath = Path.Combine(documentsPath, fileName);
-            //return System.IO.File.ReadAllText(filePath);
-            return filePath;
+
+            if (!File.Exists(filePath))
+            {
+                return new Maybe<string>();
+            }
+
+            jsonData = File.ReadAllText(filePath);
+            return new Maybe<string>(jsonData);
         }
     }
 }

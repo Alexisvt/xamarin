@@ -1,8 +1,9 @@
 ﻿
+using HelperClasses;
 namespace CorrelacionHimnarioAdventista.Models.Abstract
 {
     public interface ILoadFile
     {
-        string LoadJson(string fileName);
+        Maybe<string> LoadJson(string fileName);
     }
 }
