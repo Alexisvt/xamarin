@@ -1,4 +1,5 @@
 ﻿using CorrelacionHimnarioAdventista.Models.Concrete;
+using HelperClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,8 @@ namespace CorrelacionHimnarioAdventista.Models.Abstract
 {
     public interface IReadOnlyRepository
     {
-        HimnoModel getHimnoByNumber(int number, string edition);
+        Maybe<HimnoModel> getHimnoByNumber(int number, string edition);
 
-        HimnoModel getHimnoByName(string name);
+        Maybe<HimnoModel> getHimnoByName(string name);
     }
 }

@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using CorrelacionHimnarioAdventista.Models;
+using CorrelacionHimnarioAdventista.Models.Concrete;
+using HelperClasses;
+using System;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -12,40 +12,71 @@ namespace CorrelacionHimnarioAdventista.ViewModels
     public class SearchViewModel : INotifyPropertyChanged
     {
         #region Fields
-        private int _oldEditionNumber;
-        private int _newEditionNumber;
+        private string _oldEditionNumber;
+        private string _newEditionNumber;
         private bool _isBussy;
         private string _himnoName;
+        private JsonRepository _jsonRepository;
+        private bool _isSearchable;
+
         #endregion
 
         #region Properties
-        public int OldEditionNumber 
+
+        public bool IsSearchable
+        {
+            get { return _isSearchable; }
+            private set 
+            {
+                if (_isSearchable == value)
+                {
+                    return;
+                }
+
+                _isSearchable = value;
+                OnPropertyChanged("IsSearchable");
+            }
+        }
+
+        private JsonRepository Repository
+        {
+            get { return _jsonRepository; }
+            set { _jsonRepository = value; }
+        }
+
+        public string OldEditionNumber 
         { 
             get { return _oldEditionNumber; }
             set
             {
-                if (_oldEditionNumber == value)
+                if (!string.IsNullOrEmpty(_oldEditionNumber) && _oldEditionNumber.Equals(value))
                 {
                     return;
                 }
 
                 _oldEditionNumber = value;
                 OnPropertyChanged("OldEditionNumber");
+
+                //Check if are valid data to search
+                CanSearch();
             }
         }
 
-        public int NewEditionNumber
+        public string NewEditionNumber
         {
             get { return _newEditionNumber; }
             set 
             {
-                if (_newEditionNumber == value)
+                if (!string.IsNullOrEmpty(_newEditionNumber) && _newEditionNumber.Equals(value))
                 {
                     return;
                 }
 
                 _newEditionNumber = value;
                 OnPropertyChanged("NewEditionNumber");
+
+                //Check if are valid data to search
+                this.CanSearch();
             }
         }
 
@@ -76,6 +107,9 @@ namespace CorrelacionHimnarioAdventista.ViewModels
 
                 _himnoName = value;
                 OnPropertyChanged("HimnoName");
+
+                //Check if are valid data to search
+                this.CanSearch();
             }
         }
         #endregion
@@ -83,8 +117,9 @@ namespace CorrelacionHimnarioAdventista.ViewModels
         #region Constructor
         public SearchViewModel()
         {
-            SearchHimnoByNameCommand = new Command(SearchHimnoByName, CanSearchHimnoByName);
-            SearchHimnoByNumberCommand = new Command(SearchHimnoByNumber, CanSearchHimnoByNumber);
+            this.Repository = new JsonRepository();
+            SearchHimnoCommand = new Command(SearchHimnoByNumberAction);
+            SearchHimnoByNameCommand = new Command(SearchHimnoByNameAction);
         }
         #endregion
 
@@ -101,29 +136,80 @@ namespace CorrelacionHimnarioAdventista.ViewModels
         #endregion
 
         #region ICommands Properties
+        public ICommand SearchHimnoCommand { get; set; }
         public ICommand SearchHimnoByNameCommand { get; set; }
-        public ICommand SearchHimnoByNumberCommand { get; set; }
         #endregion
 
         #region Methods
-        protected virtual bool CanSearchHimnoByName()
+        /// <summary>
+        /// Check if are valid data to enable searching
+        /// </summary>
+        protected virtual void CanSearch()
         {
-            return !String.IsNullOrWhiteSpace(_himnoName);
+            int oldEditionNumber = 
+                string.IsNullOrEmpty(OldEditionNumber) ? 0 : Convert.ToInt32(OldEditionNumber);
+            int newEditionNumber = 
+                string.IsNullOrEmpty(NewEditionNumber) ? 0 : Convert.ToInt32(NewEditionNumber);
+
+            if (string.IsNullOrEmpty(HimnoName) &&
+                (oldEditionNumber < 0 || oldEditionNumber == 0) &&
+                (newEditionNumber < 0 || newEditionNumber == 0))
+            {
+                IsSearchable = false;
+            }
+            else
+            {
+                IsSearchable = true;
+            }
         }
 
-        protected virtual void SearchHimnoByName()
+        protected virtual void SearchHimnoByNameAction()
         {
+            Maybe<HimnoModel> Himno;
 
+            if (!String.IsNullOrEmpty(HimnoName))
+            {
+                Himno = this.Repository.getHimnoByName(this.HimnoName);
+
+                if (Himno.Count() > 0)
+                {
+                    this.NewEditionNumber = Himno.First().Numbers.New.ToString();
+                    this.OldEditionNumber = Himno.First().Numbers.Old.ToString();
+                }
+            }
         }
 
-        protected virtual bool CanSearchHimnoByNumber()
+        protected virtual void SearchHimnoByNumberAction()
         {
-            return _oldEditionNumber != 0 || _newEditionNumber != 0;
-        }
+            Maybe<HimnoModel> Himno;
+            int oldEditionNumber = 
+                string.IsNullOrEmpty(OldEditionNumber) ? 0 : Convert.ToInt32(OldEditionNumber);
+            int newEditionNumber = 
+                string.IsNullOrEmpty(NewEditionNumber) ? 0 : Convert.ToInt32(NewEditionNumber);
 
-        protected virtual void SearchHimnoByNumber()
-        {
+            IsBussy = true;
 
+            if (oldEditionNumber != 0)
+            {
+                Himno = Repository.getHimnoByNumber(oldEditionNumber, "Old");
+
+                if (Himno.Count() > 0)
+                {
+                    this.NewEditionNumber = Himno.First().Numbers.New.ToString();
+                    this.HimnoName = Himno.First().Name;
+                }
+            }
+            else if (newEditionNumber != 0)
+            {
+                Himno = Repository.getHimnoByNumber(newEditionNumber, "New");
+                if (Himno.Count() > 0)
+                {
+                    OldEditionNumber = Himno.First().Numbers.Old.ToString();
+                    HimnoName = Himno.First().Name;
+                }
+            }
+
+            IsBussy = false;
         }
         #endregion
     }

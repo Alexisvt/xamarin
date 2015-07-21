@@ -1,0 +1,18 @@
+[
+	{
+	"Name": "Cantad alegres al Señor",
+	"Numbers": { "New": 1, "Old": 1 }	
+	},
+	{
+		"Name" : "Da Gloria al Señor",
+		"Numbers":  { "New": 2, "Old" : 2}
+	},
+	{
+		"Name": "¡Santo! ¡Santo! ¡Santo! Tu gloria llena",
+		"Numbers": { "New": 60, "Old": 3}
+	},
+	{
+		"Name": "¡Alabadle!",
+		"Numbers": {"New": 141, "Old": 4}
+	}
+]
