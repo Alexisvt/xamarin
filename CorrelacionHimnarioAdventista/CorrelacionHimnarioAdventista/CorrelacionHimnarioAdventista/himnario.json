@@ -11,8 +11,25 @@
 		"Name": "¡Santo! ¡Santo! ¡Santo! Tu gloria llena",
 		"Numbers": { "New": 60, "Old": 3}
 	},
-	{
-		"Name": "¡Alabadle!",
-		"Numbers": {"New": 141, "Old": 4}
-	}
+  {
+    "Name": "¡Alabadle!",
+    "Numbers": {
+      "New": 141,
+      "Old": 4
+    }
+  },
+  {
+    "Name": "A nuestro Padre Dios",
+    "Numbers": {
+      "New": 16,
+      "Old": 5
+    }
+  },
+  {
+    "Name": "De mi amante Salvador",
+    "Numbers": {
+      "New": 138,
+      "Old": 6
+    }
+  }
 ]

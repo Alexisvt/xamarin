@@ -26,7 +26,7 @@
   
   <Label Text="Correlacion entre ediciones" FontSize="32" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" XAlign="Center" YAlign="Center" />
   <Label Text="Nombre del Himno" FontSize="Large" Grid.Row="1" Grid.Column="0" XAlign="Center" YAlign="Center" Grid.ColumnSpan="2" />
-  <SearchBar Placeholder="Nombre del himno" Grid.Row="2" SearchCommand="{Binding SearchHimnoByNameCommand}"
+  <SearchBar  Placeholder="Nombre del himno" Grid.Row="2" SearchCommand="{Binding SearchHimnoByNameCommand}"
              Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding HimnoName}" />
   <Label Text="# Nuevo" FontSize="Medium" Grid.Row="3" Grid.Column="0" XAlign="Center" YAlign="Center" />  
   <Label Text="# Viejo" FontSize="Medium" Grid.Row="3" Grid.Column="1" XAlign="Center" YAlign="Center" />
