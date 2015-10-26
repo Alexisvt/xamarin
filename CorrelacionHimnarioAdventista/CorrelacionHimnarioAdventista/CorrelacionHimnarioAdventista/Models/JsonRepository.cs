@@ -43,7 +43,7 @@ namespace CorrelacionHimnarioAdventista.Models
                          .Where((h) => h.Numbers.New == number).First()
                          );
                 }
-                
+
             }
             else
             {
@@ -85,7 +85,7 @@ namespace CorrelacionHimnarioAdventista.Models
             Stream stream = assembly
                 .GetManifestResourceStream("CorrelacionHimnarioAdventista.himnario.json");
 
-            using (var reader =  new StreamReader(stream))
+            using (var reader = new StreamReader(stream))
             {
                 jsonString = reader.ReadToEnd();
             }
