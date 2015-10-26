@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+             x:Class="Xlabs.PopUpExample.PopUpPage">
+  
+  <StackLayout>
+    
+  <Label Text="Hola mundo"/>
+  <Label Text="Hola mundo"/>
+  <Label Text="Hola mundo"/>
+  <Label Text="Hola mundo"/>
+  <Label Text="Hola mundo"/>
+    <Label Text="Hola mundo"/>
+  <Label Text="Hola mundo"/>
+  <Label Text="Hola mundo"/>
+  <Label Text="Hola mundo"/>
+  <Label Text="Hola mundo"/>
+  <Label Text="Hola mundo"/>
+  <Label Text="Hola mundo"/>
+  <Label Text="Hola mundo"/>
+  <Label Text="Hola mundo"/>
+  <Label Text="Hola mundo"/>
+  <Button x:Name="BotonPrueba" Text="Prueba" />
+  <AbsoluteLayout VerticalOptions="FillAndExpand"
+                HorizontalOptions="FillAndExpand">
+    <!--<BoxView    AbsoluteLayout.LayoutBounds="0.25, 0.25, 0.5, 0.5"
+                Color="Blue"
+                AbsoluteLayout.LayoutFlags="All" />-->
+      <controls:PopupLayout x:Name="PopLayout" AbsoluteLayout.LayoutBounds="0.25, 0.25, 0.5, 0.5" AbsoluteLayout.LayoutFlags="All">
+			  <controls:PopupLayout.Content > 
+				  <Button x:Name="OpenButton" Text="Open selector popup" />
+			  </controls:PopupLayout.Content>
+		  </controls:PopupLayout>
+</AbsoluteLayout>
+  </StackLayout>
+
+</ContentPage>
